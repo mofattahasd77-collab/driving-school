@@ -9,5 +9,7 @@ sed -ri "s/<VirtualHost \*:80>/<VirtualHost *:${PORT}>/" \
 
 php artisan config:cache
 php artisan migrate --force
+php artisan db:seed --class='Database\Seeders\QuestionSeeder' --force
+php artisan db:seed --class='Database\Seeders\AdminUserSeeder' --force
 
 exec apache2-foreground
