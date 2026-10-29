@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Tajawal', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand-50: #eef5f1;
+    --color-brand-100: #dcebe2;
+    --color-brand-200: #bdd9c8;
+    --color-brand-300: #91bea5;
+    --color-brand-400: #5c9b7d;
+    --color-brand-500: #397b60;
+    --color-brand-600: #28634d;
+    --color-brand-700: #20503f;
+    --color-brand-800: #1b4034;
+    --color-brand-900: #17352c;
+    --color-brand-950: #0c211b;
+
+    --color-sand-50: #fbfaf7;
+    --color-sand-100: #f3f0e9;
+    --color-sand-200: #e8e2d6;
+    --color-sand-300: #d7cdbb;
+    --color-sand-400: #c1b29a;
+    --color-sand-500: #aa967a;
+
+    --color-gold-400: #e8c27d;
+    --color-gold-500: #d8aa54;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+}
+
+body {
+    font-family: var(--font-sans);
+}
+
+::selection {
+    color: #fff;
+    background: #28634d;
+}
+
+summary {
+    list-style: none;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
