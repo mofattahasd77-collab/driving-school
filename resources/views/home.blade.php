@@ -405,7 +405,6 @@
             <section id="location" class="scroll-mt-24 bg-sand-50 py-20 sm:py-28 dark:bg-brand-950">
                 <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-10">
                     <div>
-                        <span class="text-sm font-extrabold tracking-wide text-brand-600 dark:text-gold-400">زورينا</span>
                         <h2 class="mt-4 text-3xl leading-tight font-extrabold text-brand-950 sm:text-4xl dark:text-white">موقع مدرسة الخنساء</h2>
                         <p class="mt-5 leading-8 text-brand-700 dark:text-sand-200">يمكنك مشاهدة موقع المدرسة على الخريطة أو فتح الاتجاهات للوصول إليها.</p>
                         
