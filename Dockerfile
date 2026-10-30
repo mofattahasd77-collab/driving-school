@@ -24,7 +24,7 @@ RUN apt-get update \
         pdo_mysql \
         pdo_pgsql \
         zip \
-    && a2enmod rewrite headers \
+    && a2enmod rewrite headers mime \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -47,8 +47,9 @@ RUN composer install \
         storage/framework/views \
         storage/logs \
         public/images/questions \
+        public/videos \
         bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache public/images \
+    && chown -R www-data:www-data storage bootstrap/cache public/images public/videos \
     && sed -ri "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" \
         /etc/apache2/sites-available/*.conf
 
@@ -56,6 +57,9 @@ RUN printf '%s\n' \
         '<Directory /var/www/html/public>' \
         '    AllowOverride All' \
         '    Require all granted' \
+        '    AddType video/mp4 .mp4' \
+        '    AddType video/webm .webm' \
+        '    AddType video/ogg .ogg .ogv' \
         '</Directory>' \
         > /etc/apache2/conf-available/laravel.conf \
     && a2enconf laravel

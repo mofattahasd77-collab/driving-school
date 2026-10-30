@@ -55,6 +55,14 @@ return [
             'throw' => true,
         ],
 
+        'tutorial_videos' => [
+            'driver' => 'local',
+            'root' => public_path('videos'),
+            'url' => '/videos',
+            'visibility' => 'public',
+            'throw' => true,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

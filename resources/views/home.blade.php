@@ -42,6 +42,7 @@
                 <nav aria-label="التنقل الرئيسي" class="hidden items-center gap-8 lg:flex">
                     <a href="#about" class="text-sm font-semibold text-brand-800 transition hover:text-brand-500 dark:text-sand-200 dark:hover:text-gold-400">عن المدرسة</a>
                     <a href="#training-fields" class="text-sm font-semibold text-brand-800 transition hover:text-brand-500 dark:text-sand-200 dark:hover:text-gold-400">مجالات التدريب</a>
+                    <a href="#educational-videos" class="text-sm font-semibold text-brand-800 transition hover:text-brand-500 dark:text-sand-200 dark:hover:text-gold-400">فيديوهات تعليمية</a>
                     <a href="{{ route('practice.index') }}" class="text-sm font-semibold text-brand-800 transition hover:text-brand-500 dark:text-sand-200 dark:hover:text-gold-400">تدرّب على الأسئلة</a>
                     <a href="#location" class="text-sm font-semibold text-brand-800 transition hover:text-brand-500 dark:text-sand-200 dark:hover:text-gold-400">موقع المدرسة</a>
                     <a href="#faq" class="text-sm font-semibold text-brand-800 transition hover:text-brand-500 dark:text-sand-200 dark:hover:text-gold-400">الأسئلة الشائعة</a>
@@ -62,8 +63,10 @@
                     </summary>
                     <nav aria-label="التنقل للجوال" class="absolute left-0 top-14 flex w-64 flex-col gap-1 rounded-2xl border border-brand-900/10 bg-white p-3 shadow-xl dark:border-white/10 dark:bg-brand-900">
                         <a href="#about" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">عن المدرسة</a>
-                        <a href="#manager" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">مدير المدرسة</a>
+                        <a href="#management-team" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">الكادر الإداري</a>
                         <a href="#training-fields" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">مجالات التدريب</a>
+                        <a href="#secondary-school" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">ثانوية الخنساء</a>
+                        <a href="#educational-videos" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">فيديوهات تعليمية</a>
                         <a href="{{ route('practice.index') }}" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">تدرّب على الأسئلة</a>
                         <a href="#journey" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">خطواتك</a>
                         <a href="#location" class="rounded-xl px-4 py-3 font-semibold text-brand-900 hover:bg-brand-50 dark:text-white dark:hover:bg-white/10">موقع المدرسة</a>
@@ -167,6 +170,37 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <section id="educational-videos" aria-labelledby="educational-videos-title" class="scroll-mt-24 bg-white py-20 sm:py-28 dark:bg-brand-950">
+                <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+                    <div class="mx-auto max-w-2xl text-center">
+                        <span class="text-sm font-extrabold tracking-wide text-brand-600 dark:text-gold-400">تعلّم بالمشاهدة</span>
+                        <h2 id="educational-videos-title" class="mt-4 text-3xl font-extrabold text-brand-950 sm:text-4xl dark:text-white">فيديوهات تعليمية قصيرة و لقطات لقيادة بعض المتدربين</h2>
+                        <p class="mt-4 leading-8 text-brand-700 dark:text-sand-200">شاهد دروسًا مختصرة تساعدك على فهم أساسيات القيادة والاستعداد لمواقف الطريق.</p>
+                    </div>
+
+                    @forelse ($videos as $video)
+                        @if ($loop->first)
+                            <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        @endif
+                        <article class="overflow-hidden rounded-[1.75rem] border border-brand-900/10 bg-sand-50 shadow-sm dark:border-white/10 dark:bg-brand-900">
+                            <div class="aspect-video w-full shrink-0 bg-brand-950">
+                                <video class="size-full object-contain" controls preload="metadata" playsinline>
+                                    <source src="{{ $video['url'] }}" type="{{ $video['type'] }}">
+                                    متصفحك لا يدعم تشغيل الفيديو.
+                                </video>
+                            </div>
+                        </article>
+                        @if ($loop->last)
+                            </div>
+                        @endif
+                    @empty
+                        <p class="mx-auto mt-10 max-w-2xl rounded-2xl border border-dashed border-brand-900/20 bg-sand-50 px-6 py-5 text-center leading-8 text-brand-700 dark:border-white/20 dark:bg-brand-900 dark:text-sand-200">
+                            ستظهر الفيديوهات هنا بعد إضافة ملفات MP4 أو WEBM أو OGG إلى المجلد <code dir="ltr" class="rounded bg-brand-900/5 px-2 py-1 font-mono text-sm dark:bg-white/10">public/videos</code>.
+                        </p>
+                    @endforelse
                 </div>
             </section>
 
@@ -459,26 +493,59 @@
                 </div>
             </section>
 
-                        <section id="manager" class="scroll-mt-24 bg-white py-20 sm:py-28 dark:bg-brand-900">
-                <div class="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 lg:px-10">
-                    <div class="relative mx-auto grid aspect-[4/3] w-full max-w-lg place-items-center overflow-hidden rounded-[2rem] border border-brand-900/10 bg-sand-100 dark:border-white/10 dark:bg-brand-950">
-                        <div class="absolute -left-12 -top-12 size-48 rounded-full bg-gold-400/20 blur-2xl"></div>
-                        <div class="relative grid size-32 place-items-center rounded-full border border-brand-900/10 bg-white text-brand-500 shadow-xl dark:border-white/10 dark:bg-brand-900 dark:text-gold-400">
-                            <svg class="size-16" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-                                <circle cx="32" cy="22" r="11" fill="currentColor" opacity=".8"/>
-                                <path d="M12 56c1.7-11.2 9.5-17 20-17s18.3 5.8 20 17" fill="currentColor" opacity=".8"/>
-                            </svg>
-                        </div>
-                        <span class="absolute inset-x-0 bottom-5 text-center text-sm font-semibold text-brand-600 dark:text-sand-300"></span>
+            <section id="management-team" class="scroll-mt-24 bg-white py-20 sm:py-28 dark:bg-brand-900">
+                <div class="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
+                    <div class="mx-auto max-w-2xl text-center">
+                        <span class="text-sm font-extrabold tracking-wide text-brand-600 dark:text-gold-400">إدارة المدرسة</span>
+                        <h2 class="mt-4 text-3xl leading-tight font-extrabold text-brand-950 sm:text-4xl dark:text-white">الكادر الإداري</h2>
+                        <p class="mt-4 leading-8 text-brand-700 dark:text-sand-200">تعرّف على مديري مدرسة الخنساء.</p>
                     </div>
 
-                    <div>
-                        <span class="text-sm font-extrabold tracking-wide text-brand-600 dark:text-gold-400">إدارة المدرسة</span>
-                        <h2 class="mt-4 text-3xl leading-tight font-extrabold text-brand-950 sm:text-4xl dark:text-white">مدير مدرسة الخنساء</h2>
-                        <p class="mt-4 text-2xl font-bold text-brand-700 dark:text-sand-100">أ. باسل بكداش</p>
-                        <p class="mt-4 leading-8 text-brand-700 dark:text-sand-200">للاستفسار عن خدمات المدرسة ومجالات التدريب، يمكنك التواصل مباشرة مع مدير المدرسة عبر الاتصال أو واتساب.</p>
+                    <div class="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2">
+                        <figure class="overflow-hidden rounded-[1.75rem] border border-brand-900/10 bg-sand-50 shadow-sm dark:border-white/10 dark:bg-brand-950">
+                            <div class="grid aspect-[4/3] place-items-center overflow-hidden bg-sand-100 dark:bg-brand-900">
+                                @if (file_exists(public_path('images/managers/manager-1.jpeg')))
+                                    <img src="{{ asset('images/managers/manager-1.jpeg') }}" alt="صورة أ. باسل بكداش" class="size-full object-cover">
+                                @else
+                                    <div class="grid justify-items-center gap-3 text-brand-500 dark:text-gold-400">
+                                        <svg class="size-20" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                                            <circle cx="32" cy="22" r="11" fill="currentColor" opacity=".8"/>
+                                            <path d="M12 56c1.7-11.2 9.5-17 20-17s18.3 5.8 20 17" fill="currentColor" opacity=".8"/>
+                                        </svg>
+                                        <span class="text-sm font-semibold">الصورة التعريفية ستضاف قريبًا</span>
+                                    </div>
+                                @endif
+                            </div>
+                            <figcaption class="px-6 py-5 text-center">
+                                <h3 class="text-lg font-extrabold text-brand-900 dark:text-white">أ. باسل بكداش</h3>
+                                <p class="mt-1 text-sm font-medium text-brand-600 dark:text-sand-300">مدير المدرسة</p>
+                            </figcaption>
+                        </figure>
 
-                        <div class="mt-7 flex flex-wrap gap-3">
+                        <figure class="overflow-hidden rounded-[1.75rem] border border-brand-900/10 bg-sand-50 shadow-sm dark:border-white/10 dark:bg-brand-950">
+                            <div class="grid aspect-[4/3] place-items-center overflow-hidden bg-sand-100 dark:bg-brand-900">
+                                @if (file_exists(public_path('images/managers/manager-2.jpeg')))
+                                    <img src="{{ asset('images/managers/manager-2.jpeg') }}" alt="صورة المدير الثاني في مدرسة الخنساء" class="size-full object-cover">
+                                @else
+                                    <div class="grid justify-items-center gap-3 text-brand-500 dark:text-gold-400">
+                                        <svg class="size-20" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                                            <circle cx="32" cy="22" r="11" fill="currentColor" opacity=".8"/>
+                                            <path d="M12 56c1.7-11.2 9.5-17 20-17s18.3 5.8 20 17" fill="currentColor" opacity=".8"/>
+                                        </svg>
+                                        <span class="text-sm font-semibold">الصورة التعريفية ستضاف قريبًا</span>
+                                    </div>
+                                @endif
+                            </div>
+                            <figcaption class="px-6 py-5 text-center">
+                                <h3 class="text-lg font-extrabold text-brand-900 dark:text-white">أ. يوسف بكداش</h3>
+                                <p class="mt-1 text-sm font-medium text-brand-600 dark:text-sand-300">المدير الإداري</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="mx-auto mt-10 max-w-3xl text-center">
+                        <p class="leading-8 text-brand-700 dark:text-sand-200">للاستفسار عن خدمات المدرسة ومجالات التدريب، يمكنك التواصل مباشرة مع مدير المدرسة أ. باسل بكداش عبر الاتصال أو واتساب.</p>
+                        <div class="mt-7 flex flex-wrap justify-center gap-3">
                             <a href="tel:+963957836397" class="inline-flex items-center justify-center gap-2 rounded-full bg-brand-800 px-6 py-3.5 font-bold text-white shadow-lg shadow-brand-900/10 transition hover:-translate-y-0.5 hover:bg-brand-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 dark:bg-gold-400 dark:text-brand-950 dark:hover:bg-gold-500">
                                 <svg class="size-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                                     <path d="M7 3h3l2 5-2 1.5a15 15 0 0 0 4.5 4.5L16 12l5 2v3c0 1.1-.9 2-2 2C10.7 19 5 13.3 5 5c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
@@ -491,6 +558,40 @@
                                 </svg>
                                 واتساب: 0957836397
                             </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="secondary-school" aria-labelledby="secondary-school-title" class="scroll-mt-24 bg-sand-50 px-5 py-20 sm:px-8 sm:py-28 dark:bg-brand-950">
+                <div class="mx-auto max-w-7xl">
+                    <div class="relative isolate overflow-hidden rounded-[2rem] bg-brand-900 p-6 text-white shadow-xl shadow-brand-950/10 sm:p-10 lg:p-14 dark:bg-black">
+                        <div class="pointer-events-none absolute -left-20 -top-24 -z-10 size-72 rounded-full bg-gold-400/15 blur-3xl"></div>
+                        <div class="grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
+                            <div>
+                                <span class="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-white/5 px-4 py-2 text-sm font-bold text-gold-400">
+                                    <span class="size-2 rounded-full bg-gold-400" aria-hidden="true"></span>
+                                    إعلان مدرسة الخنساء
+                                </span>
+                                <h2 id="secondary-school-title" class="mt-5 text-3xl leading-tight font-extrabold sm:text-4xl">مدرسة ثانوية الخنساء</h2>
+                                <p class="mt-4 leading-8 text-sand-200">مدرسة ثانوية تابعة لمدرسة الخنساء لتعليم القيادة.</p>
+                            </div>
+
+                            <div class="grid aspect-[1024/572] place-items-center overflow-hidden rounded-2xl border border-white/15 bg-white/5">
+                                @if (file_exists(public_path('images/secondary-school-ad.jpg')))
+                                    <img src="{{ asset('images/secondary-school-ad.jpg') }}" alt="إعلان مدرسة ثانوية الخنساء" class="size-full object-contain">
+                                @else
+                                    <div class="px-5 text-center">
+                                        <svg class="mx-auto size-12 text-gold-400" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                            <path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h13A2.5 2.5 0 0 1 21 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18.5v-13Z" stroke="currentColor" stroke-width="1.5"/>
+                                            <path d="m4 17 5-5 3 3 3-4 5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <circle cx="8.5" cy="8" r="1.5" stroke="currentColor" stroke-width="1.5"/>
+                                        </svg>
+                                        <p class="mt-3 font-bold text-white">مساحة إعلان المدرسة</p>
+                                        <p class="mt-2 text-sm leading-6 text-sand-200">أضف صورة الإعلان باسم <code dir="ltr" class="font-mono text-gold-400">secondary-school-ad.jpg</code> داخل <code dir="ltr" class="font-mono text-gold-400">public/images</code>.</p>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -532,6 +633,8 @@
                         <ul class="mt-4 grid gap-3 text-sm text-sand-300">
                             <li><a href="#about" class="transition hover:text-gold-400">عن المدرسة</a></li>
                             <li><a href="#training-fields" class="transition hover:text-gold-400">مجالات التدريب</a></li>
+                            <li><a href="#secondary-school" class="transition hover:text-gold-400">مدرسة ثانوية الخنساء</a></li>
+                            <li><a href="#educational-videos" class="transition hover:text-gold-400">فيديوهات تعليمية</a></li>
                             <li><a href="{{ route('practice.index') }}" class="transition hover:text-gold-400">التدريب على الأسئلة</a></li>
                             <li><a href="#journey" class="transition hover:text-gold-400">مراحل التدريب</a></li>
                             <li><a href="#location" class="transition hover:text-gold-400">موقع المدرسة</a></li>
