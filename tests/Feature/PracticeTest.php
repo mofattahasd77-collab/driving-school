@@ -23,9 +23,11 @@ class PracticeTest extends TestCase
     {
         $this->get(route('home'))
             ->assertOk()
-            ->assertSee('استعد للاختبار النظري، سؤالًا بعد سؤال')
-            ->assertSee('مجالات التعلّم في مدرسة الخنساء')
+            ->assertSee('راجع معلوماتك واستعد للاختبار النظري')
+            ->assertSee('مهارات قيادة متكاملة في مكان واحد')
             ->assertSee('أساسيات السيارة والتحكّم')
+            ->assertSee('دروس متعددة للتحضير للاختبارات')
+            ->assertSee('خدمة نقل متوفرة للطلاب')
             ->assertSee(route('practice.index'));
     }
 
